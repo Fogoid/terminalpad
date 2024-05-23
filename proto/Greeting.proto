@@ -1,14 +1,37 @@
 syntax = "proto3";
-option go_package = "github.com/fogoid/terminalpad-engine/proto";
+option go_package = "github.com/fogoid/terminalpad/proto";
 
-service Greeter {
-    rpc SayHello (HelloRequest) returns (HelloReply) {}
+service Notepad {
+    rpc GetAllNotes(Empty) returns (stream NoteResponse) {}
+    rpc GetNote (NoteGetRequest) returns (NoteResponse) {}
+    rpc CreateNote (NewNoteRequest) returns (NoteResponse) {}
+    rpc UpdateNote (UpdateNoteRequest) returns (NoteResponse) {}
+    rpc DeleteNote (DeleteNoteRequest) returns (Empty) {}
 }
 
-message HelloRequest {
-    string name = 1;
+message Empty {}
+
+message NewNoteRequest {
+    string title = 1;
+    string content = 2;
 }
 
-message HelloReply {
-    string message = 1;
+message NoteGetRequest {
+    string id = 1;
+};
+
+message UpdateNoteRequest {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message DeleteNoteRequest {
+    string id = 1;
+}
+
+message NoteResponse {
+    string id = 1;
+    string title = 2;
+    string content = 3;
 }
