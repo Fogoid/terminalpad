@@ -5,7 +5,7 @@ import (
 	"net"
 
 	"github.com/fogoid/terminalpad-server/cmd/grpcservers"
-	"github.com/fogoid/terminalpad/proto"
+	"github.com/fogoid/terminalpad-server/domain/usecase/notes"
 	"google.golang.org/grpc"
 )
 
@@ -16,8 +16,9 @@ func main() {
         log.Fatalf("Failed to create listener: %v", err)
     }
 
+    noteService := notes.NewNoteService()
     s := grpc.NewServer()
-    grpcservers.RegisterNoteServer(s)
+    grpcservers.RegisterNoteServer(s, noteService)
 
     err = s.Serve(lis)
     if (err != nil) {
