@@ -45,7 +45,7 @@ _____________________
 |___________________|
 
 
-### Login 
+### Login
 _____________________
 |                   |
 |                   |
@@ -53,3 +53,11 @@ _____________________
 |       Password:   |
 |       Login       |
 |___________________|
+
+## TODO - Server
+
+1. Restructure logging. Is not being applied properly.
+Values passed should have values such as metrics (key-pair attributes)
+Pass down the context through the functions so that the same logger is
+always used
+2 Restructure error handling. Does not seem right
